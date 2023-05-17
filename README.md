@@ -3,8 +3,8 @@
 Master Thesis GitHub repostory (Machine Learning for the characterization of COPD).
 
 ## Table of contents
-- [Abstract]()
-- [Folder Structure]()
+- [Abstract](https://github.com/airipl/Pose-Lagoa_et_al_COPD_prediction/tree/main#abstract)
+- [Folder Structure](https://github.com/airipl/Pose-Lagoa_et_al_COPD_prediction/tree/main#folder-structure)
    - [data](https://github.com/airipl/Pose-Lagoa_et_al_COPD_prediction/tree/main/data)
    - [src](https://github.com/airipl/Pose-Lagoa_et_al_COPD_prediction/tree/main/src)
 
