@@ -44,17 +44,26 @@ The project has the following folder structure:
     │
     ├── data/  
     |   |
-    |   ├── load_files_GSE47460.R   <- load raw data
-    |   └──	omnipath.R    <- extraction of the different collection of genes and inspection of the relations among them
+    |   └── load_files_GSE47460.R   <- load raw data
     │
+    ├── eda/
+    │   │  
+    │   ├── eda_both_plt.R    <- explorative data analysis of expression data of both platforms
+    │   └── initial_eda.R    <- explorative data analysis of expression data by platform
+    │ 
     ├── expression_objects/   
     │   │  
     |   └──	eset_objects_GSE47460.R   <- preprocessing steps for the generation of the Expression Set Objects 
-    │
-    ├── models_out/         
+    │   
+    ├── feature_selection/
     │   │                
-    |   ├── dea.R   <- Differential Expression Analysis
+    |   ├── bash_eset.sh   <- command to run mrmr algorithm
+    |   ├── dea.R   <- Differential Expression Analysis
     |   ├── gsea.R    <- Gene Set Enrichment Analysis
+    |   └──	omnipath.R    <- extraction of the different collection of genes and inspection of the relations among them
+    | 
+    ├── ML_models/         
+    │   │                
     |   ├── run_ML_mRMR_gs_cv_rep.R   <- ML algorithms using grid search tuning methodoly with a simple 10-fold cross-validation
     |   ├── run_ML_mRMR_gs_cv_simple.R    <- ML algorithms using grid search tuning methodoly with a repeated 10-fold cross-validation
     |   ├── run_ML_mRMR_optm.R    <- ML algorithms using Bayes optimization tuning methodoly with a repeated 10-fold cross-validation
@@ -68,20 +77,12 @@ The project has the following folder structure:
     │
     ├── support/
     │   │  
-    │   └── filter.py    <- filter mRMR result files 	
-    │
-    ├── eda/
-    │   │  
-    │   ├── eda_both_plt.R    <- explorative data analysis of expression data of both platforms
-    │   └── initial_eda.R    <- explorative data analysis of expression data by platform
-    │
+    │   └── filter.py    <- filter mRMR result files 
     │
     └── visualization_eda/ 
         │  
         ├── RadarChart.R    <- Radar Chart of ML resutls generation
         ├── conclusion.R    <- results comparison between the different ML algorithms
-        ├── eda_both_plt.R    <- explorative data analysis of expression data of both platforms
-        ├── initial_eda.R    <- explorative data analysis of expression data by platform
         ├── metrics.R    <- recolect results (metrics, missclasified samples) of ML models
         ├── metrics_comparison.R    <- comparison between the different ML algorithms
         ├── miss_sample.R    <- analysis of missclasified samples
@@ -93,3 +94,6 @@ The project has the following folder structure:
 ## Code
 ### Data loading and preparation
 First, we downloaded the raw data from GEO and we prepared it for reading and processing (`src/data/load_files_GSE47460.R`). We also applied a pipeline for data preprocessing (normalization, bg correction, filtering of genes and probes...) and generation of the Expression Set objects (`src/expression_objects/eset_objects_GSE47460.R`). The script `outliers.R` was generated for the detection of the outlier samples. A first explorative data analysis was computed to each platform separated (`src/eda/initial_eda.R`) and joining both of them (`src/eda/eda_both_plt.R`) (both scripts update the expression objects if necessary).
+
+### Feature Selection 
+Then, we split the data into training and test set (`src/ML_models/train_test.R`). Over the training data, we performed the Differential Expression Analysis (`src/feature_selection/dea.R`), mRMR algorithm (`src/feature_selection/bash_eset.sh`), and obtained the data_driven, COPD-related and expansions lists of genes (`src/feature_selection/omnipath.R`). Moreover, we performed a Gene Set Enrichment Analysis (`src/feature_selection/gsea.R`) and Enrichemnet Analysis (`src/features_selection/omnipath.R`).
