@@ -7,6 +7,7 @@ Master Thesis GitHub repostory (Machine Learning for the characterization of COP
 - [Folder Structure](https://github.com/airipl/Pose-Lagoa_et_al_COPD_prediction/tree/main#folder-structure)
    - [data](https://github.com/airipl/Pose-Lagoa_et_al_COPD_prediction/tree/main/data)
    - [src](https://github.com/airipl/Pose-Lagoa_et_al_COPD_prediction/tree/main/src)
+- [Code]()
 
 ## Abstract
 Chronic Obstructive Pulmonary Disease (COPD) is a complex, heterogeneous, highly prevalent, 
@@ -44,8 +45,7 @@ The project has the following folder structure:
     ├── data/  
     |   |
     |   ├── load_files_GSE47460.R   <- load raw data
-    |   ├── omnipath.R    <- extraction of the different collection of genes and inspection of the relations among them
-    |   └──	validation_data.R   <- load data for ML algorithms validation
+    |   └──	omnipath.R    <- extraction of the different collection of genes and inspection of the relations among them
     │
     ├── expression_objects/   
     │   │  
@@ -58,8 +58,7 @@ The project has the following folder structure:
     |   ├── run_ML_mRMR_gs_cv_rep.R   <- ML algorithms using grid search tuning methodoly with a simple 10-fold cross-validation
     |   ├── run_ML_mRMR_gs_cv_simple.R    <- ML algorithms using grid search tuning methodoly with a repeated 10-fold cross-validation
     |   ├── run_ML_mRMR_optm.R    <- ML algorithms using Bayes optimization tuning methodoly with a repeated 10-fold cross-validation
-    |   ├── train_test.R    <- generation of train test sets
-    |   └──	validation.R    <- validation of ML algorithms
+    |   └──	train_test.R    <- generation of train test sets
     │
     ├── random/
     │   │  
@@ -83,3 +82,7 @@ The project has the following folder structure:
         ├── random_analysis.R    <- analysis of random ML models results
         └── time_analysis.R     <- time analysis of different ML models
 ```
+
+## Code
+### Data loading and preparation
+First, we downloaded the raw data from GEO and we prepared it for reading and processing (`src/data/load_files_GSE47460.R`). We also applied a pipeline for data preprocessing (normalization, bg correction, filtering of genes and probes...) and generation of the Expression Set objects (`src/expression_objects/eset_objects_GSE47460.R`). The script `outliers.R` was generated for the detection of the outlier samples. A first explorative data analysis was computed to each platform separated (`initial_eda.R`) and joining both of them (`eda_both_plt.R`).
