@@ -1,3 +1,10 @@
+#!/bin/Rscript
+###############################################################################
+############# COPD-related, data-driven and expansions #######################
+###############################################################################
+## command: Rscript omnipath.R
+## output: Lists of genes and enrichment analysis
+
 ### Genes related with COPD ###
 ## ----------------------------------------------------------------------------------------------------------------------------------------
 # Set seed
@@ -7,6 +14,13 @@ set.seed(1234)
 # Required Packages
 library(OmnipathR);library(dplyr); library(tidyr); library(reshape2); library(ggplot2);
 library(clusterProfiler); library(org.Hs.eg.db); library(pheatmap); library(sva)
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Required directories
+if ("OmniPath"%in%list.files("../../data/") == FALSE){
+  dir.create("../../data/OmniPath/", showWarnings = FALSE)}
+if ("feature_selection"%in%list.files("../../data/Enrichment") == FALSE){
+  dir.create("../../data/Enrichment/feature_selection", showWarnings = FALSE)}
 
 ## ----------------------------------------------------------------------------------------------------------------------------------------
 # Load data
