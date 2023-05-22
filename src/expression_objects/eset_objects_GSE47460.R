@@ -1,5 +1,6 @@
 #!/bin/Rscript
 # command: Rscript eset_objects_GSE47460.R plt (plt = 14550 or 6480)
+# output: Expression Set objec (expression.Rda) for each platform
 ###############################################################################
 ############### OBTAIN ESET OBJECTS FOR EACH PLATFORM #########################
 ###############################################################################
