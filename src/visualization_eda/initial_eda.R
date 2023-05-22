@@ -1,4 +1,12 @@
-### cos resultados de outliers pintar all samples por outliers q aparecen sempre
+#!/bin/Rscript
+###############################################################################
+#################### UPDATE ESET AND INITIAL EDA ##############################
+###############################################################################
+### This script has 2 parts:
+## 1. Update the expression object with no negative expression genes
+## 2. A first EDA analysis to understand data structure
+## command: Rscript visualization_eda.R plt eset_name (plt: 14550 o 6480 & eset_name: expression)
+## output: updated eset object and several pca, umap, clustering plots
 
 ## ----setup------------------------------------------------------------------------------------------------------------
 # Set working directory
@@ -65,6 +73,8 @@ dim(eset)
 # Update expression set (without genes negative expressions (if it corresponds))
 save(eset,file = paste("../../ExpressionSetObjects/",plt,"/",eset_name,"_updated.Rda", sep=""))
 
+## ----------------------------------------------------------------------------------------------------------------------------------------------
+# EDA (inital to understand the data structure)
 ## ----------------------------------------------------------------------------------------------------------------------------------------------
 # Outliers
 if(plt == 6480){
