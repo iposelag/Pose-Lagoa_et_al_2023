@@ -30,6 +30,9 @@ if (length(args)==0) {
 # Create required directories
 if ("ExpressionSetObjects"%in%list.files("../../") == FALSE){dir.create("../../ExpressionSetObjects")}
 if (plt%in%list.files("../../ExpressionSetObjects") == FALSE){dir.create(paste("../../ExpressionSetObjects/",plt,sep=""))}
+if ("Visualization"%in%list.files("../../") == FALSE){dir.create("../../Visualization")}
+if (plt%in%list.files("../../Visualization") == FALSE){dir.create(paste("../../Visualization/",plt,sep=""))}
+if ("outliers"%in%list.files("../../Visualization") == FALSE){dir.create("../../Visualization/outliers")}
 
 ## ----------------------------------------------------------------------------------------------------------------------------------------------
 # Series Matrix from GEO
@@ -78,7 +81,7 @@ if(plt == "6480"){
 
 gpl <- gpl@dataTable@table
 probe_symbol <- gpl[, c("ID", "GENE_SYMBOL")]
-probe_symbol <- probe_symbol %>% 
+probe_symbol <- probe_symbol %>%
   rename(
     ID_PROBE = ID
   )
@@ -89,6 +92,10 @@ dim(probe_symbol)
 table(GLPraw$genes$ProbeName == probe_symbol$ID_PROBE) # check that annots are aligned
 GLPraw$genes$ID_PROBE <- probe_symbol$ID_PROBE
 GLPraw$genes$GENE_SYMBOL <- probe_symbol$GENE_SYMBOL
+
+## ----------------------------------------------------------------------------------------------------------------------------------------------
+# Set working directory
+setwd(paste("../../Visualization/", plt,"/",sep = ""))
 
 ## ----------------------------------------------------------------------------------------------------------------------------------------------
 # Background correction
@@ -111,7 +118,7 @@ save(GLP_bgcorrect_norm,file = paste("../../ExpressionSetObjects/",plt,"/GLP_bgc
 ## Controls
 Control <- GLP_bgcorrect_norm$genes$ControlType==1L
 ## NoSymbol
-NoSymbol <- GLP_bgcorrect_norm$genes$GENE_SYMBOL == "" 
+NoSymbol <- GLP_bgcorrect_norm$genes$GENE_SYMBOL == ""
 GLP_bgcorrect_norm_filt <- GLP_bgcorrect_norm[!Control &
                                                 !NoSymbol, ]
 # Check data dimensions
@@ -162,7 +169,7 @@ featuredata <- new("AnnotatedDataFrame", data = data_annot,
                    varMetadata = metadata_f)
 exprs = GLP_bgcorrect_norm_filt$E
 colnames(exprs) <- colnames(exprs) %>%
-    str_extract('G.{9}') 
+    str_extract('G.{9}')
 exprs <- exprs[,match(rownames(phenotypedata),colnames(exprs))]
 eset_outliers <- ExpressionSet(assayData = assayDataNew(exprs = exprs),
                       phenoData =  phenotypedata,
@@ -173,7 +180,7 @@ dim(eset_outliers)
 
 # Rare samples
 table(pData(eset_outliers)$dis_condition, pData(eset_outliers)$GOLD_stage)
-rare_samples <- filter(pData(eset_outliers), 
+rare_samples <- filter(pData(eset_outliers),
                        dis_condition == "COPD" & GOLD_stage == "0-At Risk")
 table(rownames(rare_samples),rare_samples$dis_condition)
 eset_outliers <- eset_outliers[,!(colnames(exprs(eset_outliers)) %in% rownames(rare_samples))]
@@ -183,6 +190,9 @@ n_genes <- nrow(eset_outliers)
 
 save(eset_outliers, file = paste("../../ExpressionSetObjects/",plt,"/eset_outliers.Rda", sep=""))
 # load(paste("../../ExpressionSetObjects/",plt,"/eset_outliers.Rda", sep=""))
+
+# NOTE: IN this point you should have your outliers files generated and in Visualization/outliers/ folder!!
+# HPC was used for this step
 
 ## ----------------------------------------------------------------------------------------------------------------------------------------------
 # Filtering of low quality samples (by Boxplot from arrayQualityMetrics)
@@ -205,7 +215,7 @@ n_genes <- nrow(eset_outliers)
 ## Filter lowly expressed genes
 other <- GLP_bgcorrect_norm_filt$other$gIsWellAboveBG
 colnames(other) <- colnames(other) %>%
-  str_extract('G.{9}') 
+  str_extract('G.{9}')
 other <- other[,match(rownames(phenotypedata),colnames(other))]
 other <- other[,!colnames(other)
       %in% outliers]
