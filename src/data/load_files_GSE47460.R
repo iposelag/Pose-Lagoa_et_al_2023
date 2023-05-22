@@ -26,7 +26,7 @@ names(platform) <- platform[1,]
 platform <- platform[-1,]
 platform[platform == ""] <- " "
 
-## Files from the directory: GSE47460_RAW
+## Files from the directory: GSE47460
 all_files <- list.files(".")
 
 ## Move arrays of GLP6480
