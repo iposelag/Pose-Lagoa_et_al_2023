@@ -63,11 +63,18 @@ The project has the following folder structure:
     ├── random/
     │   │  
     |   ├── outliers.R    <- obtain list of outlier samples
+    |   ├── outliers.txt    <- file to run outliers.R
     │   └── random.R    <- randomly generate ML models with using a determined number of genes as input
     │
     ├── support/
     │   │  
-    │   └── filter.py    <- filter mRMR result files 											
+    │   └── filter.py    <- filter mRMR result files 	
+    │
+    ├── eda/
+    │   │  
+    │   ├── eda_both_plt.R    <- explorative data analysis of expression data of both platforms
+    │   └── initial_eda.R    <- explorative data analysis of expression data by platform
+    │
     │
     └── visualization_eda/ 
         │  
@@ -85,4 +92,4 @@ The project has the following folder structure:
 
 ## Code
 ### Data loading and preparation
-First, we downloaded the raw data from GEO and we prepared it for reading and processing (`src/data/load_files_GSE47460.R`). We also applied a pipeline for data preprocessing (normalization, bg correction, filtering of genes and probes...) and generation of the Expression Set objects (`src/expression_objects/eset_objects_GSE47460.R`). The script `outliers.R` was generated for the detection of the outlier samples. A first explorative data analysis was computed to each platform separated (`initial_eda.R`) and joining both of them (`eda_both_plt.R`).
+First, we downloaded the raw data from GEO and we prepared it for reading and processing (`src/data/load_files_GSE47460.R`). We also applied a pipeline for data preprocessing (normalization, bg correction, filtering of genes and probes...) and generation of the Expression Set objects (`src/expression_objects/eset_objects_GSE47460.R`). The script `outliers.R` was generated for the detection of the outlier samples. A first explorative data analysis was computed to each platform separated (`src/eda/initial_eda.R`) and joining both of them (`src/eda/eda_both_plt.R`) (both scripts update the expression objects if necessary).
