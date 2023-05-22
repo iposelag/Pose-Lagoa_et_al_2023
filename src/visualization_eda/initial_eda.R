@@ -35,10 +35,10 @@ if (length(args) != 2) {
 if ("Visualization"%in%list.files("../../") == FALSE){dir.create("../../Visualization")}
 if (plt%in%list.files("../../Visualization") == FALSE){
   dir.create(paste("../../Visualization/",plt, sep =""))}
-if ("all_samples"%in%list.files(paste("../../Visualization/", plt,"/",sep="")) == FALSE){
-  dir.create(paste("../../Visualization/",plt,"/all_samples", sep =""))}
-if ("filtered"%in%list.files(paste("../../Visualization/", plt,sep="")) == FALSE){
-  dir.create(paste("../../Visualization/",plt,"/filtered", sep =""))}
+# if ("all_samples"%in%list.files(paste("../../Visualization/", plt,"/",sep="")) == FALSE){
+#   dir.create(paste("../../Visualization/",plt,"/all_samples", sep =""))}
+# if ("filtered"%in%list.files(paste("../../Visualization/", plt,sep="")) == FALSE){
+#   dir.create(paste("../../Visualization/",plt,"/filtered", sep =""))}
 
 ## ----------------------------------------------------------------------------------------------------------------------------------------------
 # Load data
