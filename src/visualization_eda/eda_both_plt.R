@@ -1,7 +1,9 @@
-#### COUSAS
+#!/bin/Rscript
+###############################################################################
+################# OBTAIN ESET OBJECTS BOTH PLATFORM ###########################
+###############################################################################
+## output: new eset object (with expression data from both platforms) and several pca and umap plots
 
-# Set working directory
-setwd("../../data/raw/GSE47460/")
 # Set seed reproducibility
 set.seed(1234)
 ## This option avoid use_directory() being verbose later on
@@ -13,21 +15,16 @@ library(tidyr); library(factoextra); library(Biobase); library(msigdbr)
 library(clusterProfiler); library(dendextend); library("ReactomePA")
 require(DOSE);library(enrichplot); library(umap); library(dplyr)
 
-## ----------------------------------------------------------------------------------------------------------------------------------------------
-# Set dea cutoff
-# args <- commandArgs(trailingOnly = TRUE)
-# if (length(args) != 1) {
-#   stop("Please provide one arguments.")
-# } else if (length(args)==1) {
-#   a <- args[1]
-# }
-
 ## --------------------------------------------------------------------------------------------------------------------
 # Create required directories
 # if ("RESULTS"%in%list.files(".") == FALSE){dir.create("RESULTS", showWarnings = FALSE)}
 # if ("H_CLUST"%in%list.files("RESULTS") == FALSE){dir.create("RESULTS/H_CLUST", showWarnings = FALSE)}
 
 if ("both_plt"%in%list.files("../../Visualization/") == FALSE){dir.create("../../Visualization/both_plt", showWarnings = FALSE)}
+
+## --------------------------------------------------------------------------------------------------------------------
+# Set working directory
+setwd("../../data/Visualization/both_plt/")
 
 ## --------------------------------------------------------------------------------------------------------------------
 # Upload data
@@ -86,8 +83,11 @@ save(eset, file = "../../ExpressionSetObjects/eset.Rda")
 # eset <- eset_deg
 
 ## --------------------------------------------------------------------------------------------------------------------
-# BATCH effect (platform)
+# EDA both platforms
 ## --------------------------------------------------------------------------------------------------------------------
+
+## --------------------------------------------------------------------------------------------------------------------
+# BATCH effect (platform)
 
 ## --------------------------------------------------------------------------------------------------------------------
 # Batch effect detection (also see the results of AQM)
@@ -125,11 +125,6 @@ combat_edata_ph$pred_fev_postbd <- as.numeric(pData(eset)$pred_fev_postbd)
 combat_edata_ph$pred_fvc_prebd <- as.numeric(pData(eset)$pred_fvc_prebd)
 combat_edata_ph$pred_fvc_postbd <- as.numeric(pData(eset)$pred_fvc_postbd)
 combat_edata_ph$sample_id <- rownames(combat_edata_ph)
-
-
-## --------------------------------------------------------------------------------------------------------------------
-# EDA AFTER REMOVING BATCH EFFECT
-## --------------------------------------------------------------------------------------------------------------------
 
 ## --------------------------------------------------------------------------------------------------------------------
 # PCA COPD+CTRL
@@ -306,17 +301,17 @@ for(feature in c("emphysema", "pred_dlco", "pred_fev_postbd",
 
 ## --------------------------------------------------------------------------------------------------------------------
 # Generate an ESET with 3 class: CTRL, SEV, MSEV
-load(file = "../../data/ExpressionSetObjects/eset.Rda")
-eset_several_class <- eset
+# load(file = "../../data/ExpressionSetObjects/eset.Rda")
+# eset_several_class <- eset
 
-eset_several_class$GOLD_stage <- as.factor(pData(eset_several_class)$GOLD_stage)
-eset_several_class$GOLD_stage <- recode(eset_several_class$GOLD_stage, "0-At Risk"="At_Risk",
-                                     "1-Mild COPD"="No_Severe", "2-Moderate COPD"="No_Severe",
-                                     "3-Severe COPD"="Severe", "4-Very Severe COPD"="Severe")
+# eset_several_class$GOLD_stage <- as.factor(pData(eset_several_class)$GOLD_stage)
+# eset_several_class$GOLD_stage <- recode(eset_several_class$GOLD_stage, "0-At Risk"="At_Risk",
+#                                      "1-Mild COPD"="No_Severe", "2-Moderate COPD"="No_Severe",
+#                                      "3-Severe COPD"="Severe", "4-Very Severe COPD"="Severe")
 
-eset_several_class<- eset_several_class[,!is.na(eset_several_class$GOLD_stage)]
-dim(eset_several_class)
-eset_several_class$dis_condition <- as.factor(paste(eset_several_class$dis_condition, eset_several_class$GOLD_stage, sep="_"))
-eset_several_class$dis_condition <- relevel(eset_several_class$dis_condition,
-                                          ref="COPD_Severe")
-save(eset_several_class, file = "../../data/ExpressionSetObjects/eset_several_class.Rda")
+# eset_several_class<- eset_several_class[,!is.na(eset_several_class$GOLD_stage)]
+# dim(eset_several_class)
+# eset_several_class$dis_condition <- as.factor(paste(eset_several_class$dis_condition, eset_several_class$GOLD_stage, sep="_"))
+# eset_several_class$dis_condition <- relevel(eset_several_class$dis_condition,
+#                                           ref="COPD_Severe")
+# save(eset_several_class, file = "../../data/ExpressionSetObjects/eset_several_class.Rda")
