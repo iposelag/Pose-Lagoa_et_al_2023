@@ -9,9 +9,6 @@
 ## output: updated eset object and several pca, umap, clustering plots
 
 ## ----setup------------------------------------------------------------------------------------------------------------
-# Set working directory
-setwd("../../data/raw/GSE47460/")
-
 # Set seet (reproducibility)
 set.seed(1234)
 
@@ -39,6 +36,10 @@ if (plt%in%list.files("../../Visualization") == FALSE){
 #   dir.create(paste("../../Visualization/",plt,"/all_samples", sep =""))}
 # if ("filtered"%in%list.files(paste("../../Visualization/", plt,sep="")) == FALSE){
 #   dir.create(paste("../../Visualization/",plt,"/filtered", sep =""))}
+
+## ----------------------------------------------------------------------------------------------------------------------------------------------
+# Set working directory
+setwd(paste("../../data/Visualization/",plt, sep =""))
 
 ## ----------------------------------------------------------------------------------------------------------------------------------------------
 # Load data
