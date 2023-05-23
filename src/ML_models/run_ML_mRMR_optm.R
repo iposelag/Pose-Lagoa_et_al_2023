@@ -1,11 +1,3 @@
-#!/bin/Rscript
-###############################################################################
-######### ML models using a Bayes optimization hyperparameter tuning #########
-###############################################################################
-## Generate ML results 
-## command: Rscript run_ML_mRMR_optm.R inputset (Rscript run_ML_mRMR_optm.R data_driven)
-## output: metrics, confusion matrix, list of miss samples in each iteration, final ML models configurations
-
 ## ----setup, echo=FALSE, cache=FALSE------------------------------------------------------------------------------------------------------
 # Set working directory
 setwd("../../data/raw/GSE47460/")
@@ -73,7 +65,7 @@ if(a == "dea"){
   genes <- scan("../../raw/copd_genes/copd_genes.txt", what = "character", sep = ",")
   copd_ctrl_train <- copd_ctrl_train[,colnames(copd_ctrl_train) %in%
                                        c("dis_condition",genes)]
-}else if(a == "dgn_expansion"){
+}else if(a == "disgenet_expansion"){
   genes <- scan("../../OmniPath/expansion_dgn_genes.txt", what = "character", sep = ",")
   copd_ctrl_train <- copd_ctrl_train[,colnames(copd_ctrl_train) %in%
                                        c("dis_condition",genes)]
@@ -83,11 +75,11 @@ if(a == "dea"){
   copd_ctrl_train <- copd_ctrl_train[,colnames(copd_ctrl_train) %in%
                                        c("dis_condition",genes)]
 
-}else if(a == "omnipath_intersection"){
+}else if(a == "expansion_intersection"){
   genes <- scan("../../OmniPath/eset_expansion_intersection.txt", what = "character", sep = ",")
   copd_ctrl_train <- copd_ctrl_train[,colnames(copd_ctrl_train) %in%
                                        c("dis_condition",genes)]
-}else if(a == "omnipath_union"){
+}else if(a == "expansion_union"){
   genes <- scan("../../OmniPath/eset_expansion_union.txt", what = "character", sep = ",")
   copd_ctrl_train <- copd_ctrl_train[,colnames(copd_ctrl_train) %in%
                                        c("dis_condition",genes)]
