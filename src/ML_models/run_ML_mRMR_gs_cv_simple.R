@@ -1,3 +1,11 @@
+#!/bin/Rscript
+###############################################################################
+## ML models using a grid search hyperparameter tuning (simple 10-fold c-v) ##
+###############################################################################
+## Generate ML results 
+## command: Rscript run_ML_mRMR_gs_cv_simple.R inputset (Rscript run_ML_mRMR_gs_cv_simple.R data_driven)
+## output: metrics, confusion matrix, list of miss samples in each iteration, final ML models configurations
+
 ## ----setup, echo=FALSE, cache=FALSE------------------------------------------------------------------------------------------------------
 # Set working directory
 setwd("../../data/raw/GSE47460/")
