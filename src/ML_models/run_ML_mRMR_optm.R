@@ -1,3 +1,11 @@
+#!/bin/Rscript
+###############################################################################
+######### ML models using a Bayes optimization hyperparameter tuning #########
+###############################################################################
+## Generate ML results 
+## command: Rscript run_ML_mRMR_optm.R inputset (Rscript run_ML_mRMR_optm.R data_driven)
+## output: metrics, confusion matrix, list of miss samples in each iteration, final ML models configurations
+
 ## ----setup, echo=FALSE, cache=FALSE------------------------------------------------------------------------------------------------------
 # Set working directory
 setwd("../../data/raw/GSE47460/")
