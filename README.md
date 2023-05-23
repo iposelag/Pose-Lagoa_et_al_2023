@@ -7,7 +7,7 @@ Master Thesis GitHub repostory (Machine Learning for the characterization of COP
 - [Folder Structure](https://github.com/airipl/Pose-Lagoa_et_al_COPD_prediction/tree/main#folder-structure)
    - [data](https://github.com/airipl/Pose-Lagoa_et_al_COPD_prediction/tree/main/data)
    - [src](https://github.com/airipl/Pose-Lagoa_et_al_COPD_prediction/tree/main/src)
-- [Code]()
+- [Source Code (src)](https://github.com/airipl/Pose-Lagoa_et_al_COPD_prediction/tree/main#source-code-(src))
 
 ## Abstract
 Chronic Obstructive Pulmonary Disease (COPD) is a complex, heterogeneous, highly prevalent, 
