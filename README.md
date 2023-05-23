@@ -79,16 +79,16 @@ The project has the following folder structure:
     │   │  
     │   └── filter.py    <- filter mRMR result files 
     │
-    └── visualization_eda/ 
+    └── ml_results_analysis/ 
         │  
-        ├── RadarChart.R    <- Radar Chart of ML resutls generation
-        ├── conclusion.R    <- results comparison between the different ML algorithms
-        ├── metrics.R    <- recolect results (metrics, missclasified samples) of ML models
-        ├── metrics_comparison.R    <- comparison between the different ML algorithms
+        ├── barplot_ml_input_comparison.R   <- Barplots for the comparison among the different ML methods and using different inputs gene sets
+        ├── metrics.R    <- metrics recopilation of ML models
         ├── miss_sample.R    <- analysis of missclasified samples
         ├── pubmed_publications.R    <- obtain PubMed articles associated with gene-COPD terms
+        ├── RadarChart_ml_input_comparisons.R    <- RadarChart with metrics results 
         ├── random_analysis.R    <- analysis of random ML models results
-        └── time_analysis.R     <- time analysis of different ML models
+        ├── time_analysis.R    <- Comparison between time of tuning and training by input gene sets and ML model
+        └── tuning_methodologies_comparison.R     <- barplot for the comparison between tuning methodologies
 ```
 
 ## Source Code (src)
@@ -102,4 +102,4 @@ Then, we split the data into training and test set (`src/ML_models/train_test.R`
 Once we have our input genes selected, we run ML models using a grid search using simple 10-fold cross-validation (`src/ML_models/run_ML_mRMR_gs_cv_simple.R`), repeated 10-fold cross-validation (`src/ML_models/run_ML_mRMR_gs_cv_rep.R`) and Bayes optimization with repeated 10-fold cross-validation (`src/ML_models/run_ML_mRMR_optm.R`) for hyperparameter tuning. For evalutaing the significance of our results we run randomizations of the different models mantaining the size of the different input sets (`src/random/random.R`)
 
 ### Results analysis
-
+We analyse the results of our ML models performing different comparisons and plotting the results. First we recopilate the ML metrics on .csv files (`src/ml_results_analysis/metrics.R`). Then we generate different plots (`src/ml_results_analysis/tuning_methodologies_comparison.R`, `src/ml_results_analysis/barplot_ml_input_comparison.R`, `src/ml_results_analysis/miss_sample.R`, `src/ml_results_analysis/RadarChart_ml_input_comparisons.R`, `src/ml_results_analysis/pubmed_publications.R`, `src/ml_results_analysis/random_analysis.R`, `src/ml_results_analysis/time_analysis.R`).
