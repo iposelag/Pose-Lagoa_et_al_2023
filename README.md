@@ -96,4 +96,10 @@ The project has the following folder structure:
 First, we downloaded the raw data from GEO and we prepared it for reading and processing (`src/data/load_files_GSE47460.R`). We also applied a pipeline for data preprocessing (normalization, bg correction, filtering of genes and probes...) and generation of the Expression Set objects (`src/expression_objects/eset_objects_GSE47460.R`). The script `outliers.R` was generated for the detection of the outlier samples. A first explorative data analysis was computed to each platform separated (`src/eda/initial_eda.R`) and joining both of them (`src/eda/eda_both_plt.R`) (both scripts update the expression objects if necessary).
 
 ### Feature Selection 
-Then, we split the data into training and test set (`src/ML_models/train_test.R`). Over the training data, we performed the Differential Expression Analysis (`src/feature_selection/dea.R`), mRMR algorithm (`src/feature_selection/bash_eset.sh`), and obtained the data_driven, COPD-related and expansions lists of genes (`src/feature_selection/omnipath.R`). Moreover, we performed a Gene Set Enrichment Analysis (`src/feature_selection/gsea.R`) and Enrichemnet Analysis (`src/features_selection/omnipath.R`).
+Then, we split the data into training and test set (`src/ML_models/train_test.R`). Over the training data, we performed the Differential Expression Analysis (`src/feature_selection/dea.R`), mRMR algorithm (`src/feature_selection/bash_eset.sh`), and obtained the data_driven, COPD-related and expansions lists of genes (`src/feature_selection/omnipath.R`). Moreover, we performed a Gene Set Enrichment Analysis (`src/feature_selection/gsea.R`) and Enrichemnet Analysis (`src/features_selection/omnipath.R`). The ra
+
+### Machine Learning models
+Once we have our input genes selected, we run ML models using a grid search using simple 10-fold cross-validation (`src/ML_models/run_ML_mRMR_gs_cv_simple.R`), repeated 10-fold cross-validation (`src/ML_models/run_ML_mRMR_gs_cv_rep.R`) and Bayes optimization with repeated 10-fold cross-validation (`src/ML_models/run_ML_mRMR_optm.R`) for hyperparameter tuning. For evalutaing the significance of our results we run randomizations of the different models mantaining the size of the different input sets (`src/random/random.R)
+
+### Results analysis
+
