@@ -91,7 +91,7 @@ The project has the following folder structure:
         └── time_analysis.R     <- time analysis of different ML models
 ```
 
-## Code
+## Source Code (src)
 ### Data loading and preparation
 First, we downloaded the raw data from GEO and we prepared it for reading and processing (`src/data/load_files_GSE47460.R`). We also applied a pipeline for data preprocessing (normalization, bg correction, filtering of genes and probes...) and generation of the Expression Set objects (`src/expression_objects/eset_objects_GSE47460.R`). The script `outliers.R` was generated for the detection of the outlier samples. A first explorative data analysis was computed to each platform separated (`src/eda/initial_eda.R`) and joining both of them (`src/eda/eda_both_plt.R`) (both scripts update the expression objects if necessary).
 
